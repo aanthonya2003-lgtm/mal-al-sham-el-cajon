@@ -1,0 +1,64 @@
+# Mal Al Sham — The Taste of Damascus
+
+> Family-owned Syrian & Mediterranean restaurant in El Cajon, California. Founded 2018 by Mr. Ahmed Abu Ali. 100% Halal. Open daily 9 AM – 10 PM. Located at 388 E Main St, El Cajon, CA 92020. Phone: (619) 401-1055.
+
+## Identity
+
+- **Restaurant:** Mal Al Sham (مطعم مال الشام)
+- **Tagline:** The Taste of Damascus, served in El Cajon
+- **Cuisine:** Syrian / Mediterranean / Lebanese — 100% Halal
+- **Founded:** 2018
+- **Founder:** Ahmed Abu Ali (family emigrated from Syria, 2016)
+- **Address:** 388 E Main St, El Cajon, CA 92020
+- **Phone:** +1 (619) 401-1055
+- **Email:** info@malalsham.com
+- **Hours:** Monday – Sunday, 9:00 AM – 10:00 PM
+- **Price range:** $$ (Shawarma sandwich $12)
+- **Reviews:** 1,500+ five-star · 3,131 aggregate · 4.4/5 average
+- **Recognition:** Featured on Eater San Diego (twice); "Best Arab Restaurant in America" (Minnesota Tours); 5/5 (The Nexus)
+
+## Pages
+
+- [Home](https://malalsham.com/): Hero, story, signature dishes, menu preview, weekend specials, testimonials, catering, location.
+- [Menu](https://malalsham.com/menu): Full menu — breakfast, salads, kibbeh, entrees, weekend specials, family platters.
+- [Catering](https://malalsham.com/catering): Family trays and party platters serving 6 – 10, plus how-it-works steps.
+- [About](https://malalsham.com/about): The Abu Ali family's journey from Damascus to El Cajon. Values. Press.
+- [Contact](https://malalsham.com/contact): Address, hours, phone, email, embedded map, WhatsApp ordering, contact form.
+
+## Signature dishes
+
+- **Beef Shawarma** ($17.99) — marinated thinly sliced beef, slow-rotated, with tahina sauce.
+- **Chicken Shawarma Sandwich** ($12) — with fries and house sauce.
+- **Mixed Grill Special** ($23.99) — beef kabob, chicken kabob, beef tikka, chicken tikka.
+- **Mal Al Sham Falafel** ($10.99) — twelve chickpea fritters in our spice blend.
+- **Mansaf** — slow-cooked lamb over short rice with jameed yogurt sauce. **Friday – Sunday only.**
+- **Ghouzi (Ouzi)** — whole slow-roasted lamb over rice. **Friday – Sunday only.**
+- **Hummus** — stone-milled chickpeas, tahina, lemon, olive oil.
+
+## Family & party platters
+
+- **Al Sham Basmati Chicken Tray** — serves 6.
+- **Al Sham Basmati Lamb Tray** — serves 6.
+- **Mansaf Chicken Platter** — serves 10.
+- **Mansaf Lamb Platter** — serves 10.
+- **Family Combo for 5** — kabobs, tikka, shawarma, rice, salad.
+- **Mega Combo** — serves 5 – 6, fully loaded.
+
+## Features
+
+- 100% Halal · Vegetarian options · Vegan options
+- Indoor & outdoor seating · Wheelchair-accessible
+- Takeout · Delivery (GrubHub / Seamless) · Catering · Late-night
+- Free hot chai tea with every visit
+- Payments: Apple Pay, Google Pay, Visa, Mastercard, Discover, JCB, PayPal
+
+## Social
+
+- Instagram: https://www.instagram.com/malalsham.usa/
+- Facebook: https://www.facebook.com/MalAlSham.USA/
+- Yelp: https://www.yelp.com/biz/mal-al-sham-the-taste-of-damascus-el-cajon
+
+## Additional context
+
+- Full content: [/llms-full.txt](https://malalsham.com/llms-full.txt)
+- Sitemap: [/sitemap.xml](https://malalsham.com/sitemap.xml)

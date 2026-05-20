@@ -1,0 +1,22 @@
+# Mal Al Sham — robots.txt
+# Programmatic robots are handled by app/robots.ts. This file is a fallback.
+
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://malalsham.com/sitemap.xml
