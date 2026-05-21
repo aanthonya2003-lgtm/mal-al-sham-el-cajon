@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Instagram, Facebook, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { site, telHref, mailtoHref } from "@/lib/site";
+import { Logo } from "@/components/ui/Logo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -26,17 +27,13 @@ export function Footer() {
       <div className="pattern-arabesque h-px opacity-60" />
       <div className="mx-auto max-w-7xl px-5 sm:px-8 py-16 grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <Link href="/" className="inline-block">
-            <span className="font-[var(--font-display)] italic text-[1.75rem] tracking-tight">
-              Mal Al Sham
-            </span>
-            <span
-              className="block font-[var(--font-arabic)] text-lg text-[hsl(38_85%_52%)] mt-1"
-              dir="rtl"
-            >
-              {site.arabicName}
-            </span>
-          </Link>
+          <Logo height={44} />
+          <span
+            className="block font-[var(--font-arabic)] text-lg text-[hsl(38_85%_52%)] mt-3"
+            dir="rtl"
+          >
+            {site.arabicName}
+          </span>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-[hsl(35_10%_58%)]">
             Serving authentic Syrian &amp; Mediterranean cuisine in El Cajon
             since 2018. Built by the Abu Ali family — recipes brought from
@@ -139,6 +136,14 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href="#order-online"
+                className="hover:text-[hsl(38_85%_62%)]"
+              >
+                Order online
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -147,9 +152,12 @@ export function Footer() {
             Recognition
           </p>
           <ul className="mt-4 space-y-2.5 text-sm text-[hsl(38_15%_93%/0.85)]">
-            {site.press.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
+            <li>Featured on Eater San Diego</li>
+            <li>San Diego Magazine 2024</li>
+            <li>East County Magazine</li>
+            <li className="text-[hsl(38_85%_52%)]">
+              Minnesota Tours: Best Arab Restaurant in America
+            </li>
           </ul>
           <p className="mt-6 text-xs leading-relaxed text-[hsl(35_10%_58%)]">
             We accept Apple Pay, Google Pay, Visa, Mastercard, Discover, JCB,

@@ -96,6 +96,21 @@ img {
   border-radius: var(--radius);
 }
 
+/* ---------- Logo blend modes ---------- */
+/* Strip white halo from raster logos on dark surfaces. */
+.logo-img {
+  border-radius: 0;
+}
+.logo-screen {
+  mix-blend-mode: screen;
+}
+.logo-multiply {
+  mix-blend-mode: multiply;
+}
+.logo-forced-white {
+  filter: brightness(0) invert(1);
+}
+
 /* Selection — Damascus gold */
 ::selection {
   background: hsl(38 85% 52%);

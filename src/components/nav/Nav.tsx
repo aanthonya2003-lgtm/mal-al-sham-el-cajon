@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
+import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
 import { site, telHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -48,21 +49,7 @@ export function Nav() {
           aria-label="Primary"
           className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8"
         >
-          <Link
-            href="/"
-            className="flex items-center gap-3 group"
-            aria-label={`${site.name} — home`}
-          >
-            <span
-              className="font-[var(--font-display)] text-[1.35rem] tracking-tight transition-colors group-hover:text-[hsl(38_85%_62%)]"
-              style={{ fontStyle: "italic" }}
-            >
-              Mal Al Sham
-            </span>
-            <span className="hidden md:inline text-xs uppercase tracking-[0.22em] text-[hsl(35_10%_58%)]">
-              · El Cajon
-            </span>
-          </Link>
+          <Logo height={32} priority className="shrink-0" />
 
           <ul className="hidden md:flex items-center gap-9 text-sm">
             {links.map((l) => (
@@ -105,7 +92,6 @@ export function Nav() {
         </nav>
       </header>
 
-      {/* Mobile overlay — fully designed, not shrunk desktop nav */}
       <AnimatePresence>
         {open && (
           <motion.div
