@@ -1,5 +1,6 @@
 import { Hero } from "@/components/hero/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
+import { PressBar } from "@/components/sections/PressBar";
 import { Story } from "@/components/sections/Story";
 import { SignatureDishes } from "@/components/sections/SignatureDishes";
 import { MenuPreview } from "@/components/sections/MenuPreview";
@@ -14,6 +15,7 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustBar />
+      <PressBar />
       <Story />
       <SignatureDishes />
       <MenuPreview />
