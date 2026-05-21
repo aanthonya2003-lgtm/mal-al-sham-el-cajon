@@ -2,15 +2,48 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
 import { featuredDishes } from "@/lib/menu";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
 export function SignatureDishes() {
-  const reduce = useReducedMotion();
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduce || !rootRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".dish-card", {
+        scale: 0.92,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: "back.out(1.2)",
+        scrollTrigger: {
+          trigger: rootRef.current!,
+          start: "top 78%",
+          end: "top 40%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative bg-[hsl(25_12%_10%)] py-24 sm:py-32 border-y border-[hsl(30_15%_18%)]">
+    <section
+      ref={rootRef}
+      className="relative bg-[hsl(25_12%_10%)] py-24 sm:py-32 border-y border-[hsl(30_15%_18%)]"
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="House Specials"
@@ -24,18 +57,11 @@ export function SignatureDishes() {
         />
 
         <div className="mt-14 grid gap-5 sm:gap-6 md:grid-cols-3">
-          {featuredDishes.map((dish, i) => (
-            <motion.article
+          {featuredDishes.map((dish) => (
+            <article
               key={dish.name}
-              initial={reduce ? false : { opacity: 0, y: 28 }}
-              whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.25 }}
-              transition={{
-                duration: 0.7,
-                delay: i * 0.08,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="group relative flex flex-col overflow-hidden rounded-[14px] bg-[hsl(30_20%_13%)] border border-[hsl(30_15%_18%)] transition-all duration-500 hover:border-[hsl(38_60%_35%)] hover:shadow-[0_24px_48px_-24px_hsl(38_85%_52%/0.35)]"
+              className="dish-card group relative flex flex-col overflow-hidden rounded-[14px] bg-[hsl(30_20%_13%)] border border-[hsl(30_15%_18%)] transition-all duration-500 ease-out hover:scale-[1.03] hover:border-[hsl(38_60%_35%)] hover:shadow-[0_24px_56px_-20px_hsl(38_85%_52%/0.4)]"
+              style={{ willChange: "transform" }}
             >
               {dish.image ? (
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -44,7 +70,7 @@ export function SignatureDishes() {
                     alt={dish.name}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                     style={{ borderRadius: 0 }}
                   />
                   <div
@@ -80,7 +106,7 @@ export function SignatureDishes() {
                   </span>
                 ) : null}
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
 

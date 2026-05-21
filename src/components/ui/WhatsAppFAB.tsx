@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { whatsappHref } from "@/lib/site";
 
 const WhatsAppIcon = ({ size = 22 }: { size?: number }) => (
@@ -17,25 +18,48 @@ const WhatsAppIcon = ({ size = 22 }: { size?: number }) => (
 );
 
 export function WhatsAppFAB() {
-  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 1200);
-    return () => clearTimeout(t);
-  }, []);
+    if (!ref.current) return;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduce) return;
 
-  if (!visible) return null;
+    const el = ref.current;
+    const ctx = gsap.context(() => {
+      // Entry: elastic pop after 1.2s
+      gsap.from(el, {
+        scale: 0,
+        opacity: 0,
+        rotate: -45,
+        duration: 0.7,
+        delay: 1.2,
+        ease: "elastic.out(1, 0.55)",
+      });
+      // Idle pulse — gentle sine
+      gsap.to(el, {
+        scale: 1.08,
+        duration: 2.2,
+        delay: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <a
+      ref={ref}
       href={whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Order via WhatsApp"
-      className="group fixed bottom-5 right-5 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[hsl(38_85%_52%)] text-[hsl(25_15%_6%)] shadow-[0_12px_32px_-10px_hsl(38_85%_52%/0.65)] transition-all hover:bg-[hsl(38_90%_62%)] hover:scale-[1.04] sm:bottom-7 sm:right-7"
-      style={{
-        animation: "softPulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite",
-      }}
+      className="group fixed bottom-5 right-5 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[hsl(38_85%_52%)] text-[hsl(25_15%_6%)] shadow-[0_12px_32px_-10px_hsl(38_85%_52%/0.65)] transition-colors hover:bg-[hsl(38_90%_62%)] sm:bottom-7 sm:right-7"
     >
       <WhatsAppIcon size={22} />
       <span className="sr-only">Message us on WhatsApp</span>
