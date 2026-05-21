@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 
 type Props = {
-  eyebrow?: string;
-  title: React.ReactNode;
-  description?: React.ReactNode;
+  eyebrow?: ReactNode;
+  title: ReactNode;
+  description?: ReactNode;
   align?: "left" | "center";
   className?: string;
 };

@@ -5,8 +5,12 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import SplitType from "split-type";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Star } from "lucide-react";
 import { assets, site } from "@/lib/site";
+import { Counter } from "@/components/animations/Counter";
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 // Avoid useLayoutEffect SSR warning while still using it on the client
 const useIsoLayoutEffect =
@@ -15,6 +19,7 @@ const useIsoLayoutEffect =
 export function Hero() {
   const rootRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useIsoLayoutEffect(() => {
     const reduce = window.matchMedia(
@@ -29,6 +34,7 @@ export function Hero() {
     });
 
     const ctx = gsap.context(() => {
+      // Entrance timeline
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.from(
@@ -45,11 +51,12 @@ export function Hero() {
           split.chars,
           {
             opacity: 0,
-            y: 60,
+            y: 80,
             rotateX: -45,
             duration: 0.9,
-            stagger: 0.022,
-            transformOrigin: "0% 50% -20",
+            stagger: 0.025,
+            ease: "power4.out",
+            transformOrigin: "0% 50% -50",
           },
           0.35,
         )
@@ -68,6 +75,20 @@ export function Hero() {
           { opacity: 0, y: 12, duration: 0.6 },
           "-=0.35",
         );
+
+      // Parallax image — scrub, bidirectional automatically
+      if (imageRef.current) {
+        gsap.to(imageRef.current, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: rootRef.current!,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
     }, rootRef);
 
     return () => {
@@ -83,7 +104,10 @@ export function Hero() {
       aria-label="Welcome to Mal Al Sham"
     >
       {/* Background image */}
-      <div className="hero-image absolute inset-0 -z-10 will-change-transform">
+      <div
+        ref={imageRef}
+        className="hero-image absolute inset-0 -z-10 will-change-transform"
+      >
         <Image
           src={assets.interior}
           alt="Mal Al Sham — warm Damascene interior at dusk"
@@ -159,7 +183,8 @@ export function Hero() {
                 fill="hsl(38 85% 52%)"
                 stroke="hsl(38 85% 52%)"
               />
-              <span className="tnum">1,500+ five-star reviews</span>
+              <Counter to={1500} suffix="+" duration={1.6} delay={1.5} />
+              <span>five-star reviews</span>
             </span>
             <span className="hidden sm:inline-block h-3 w-px bg-[hsl(30_15%_18%)]" />
             <span>100% Halal</span>

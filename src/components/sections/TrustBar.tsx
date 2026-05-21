@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+
 const items = [
   "1,500+ Five-Star Reviews",
   "100% Halal",
@@ -17,6 +22,30 @@ const dot = (
 );
 
 export function TrustBar() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+
+  useEffect(() => {
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduce || !trackRef.current) return;
+
+    const ctx = gsap.context(() => {
+      tweenRef.current = gsap.to(trackRef.current!, {
+        xPercent: -50,
+        duration: 40,
+        ease: "none",
+        repeat: -1,
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const pause = () => tweenRef.current?.pause();
+  const resume = () => tweenRef.current?.resume();
+
   // Duplicated track for seamless loop
   const track = (
     <div className="flex shrink-0 items-center whitespace-nowrap">
@@ -36,8 +65,12 @@ export function TrustBar() {
     <section
       aria-label="Trust signals"
       className="border-y border-[hsl(30_15%_18%)] bg-[hsl(25_12%_10%)] py-5 overflow-hidden"
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      onFocus={pause}
+      onBlur={resume}
     >
-      <div className="marquee-track flex w-max">
+      <div ref={trackRef} className="flex w-max">
         {track}
         {track}
       </div>
