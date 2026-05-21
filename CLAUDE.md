@@ -2,6 +2,11 @@
 
 > Read this file before editing anything. It is the single source of truth.
 
+## Changelog
+
+- **v2 (current)** — Logo transparency (mix-blend-mode), online ordering section (DoorDash, Uber Eats, Grubhub), press recognition bar, Instagram + Yelp CTAs, GSAP-driven elite animations (split-text hero, parallax, marquee, counters, bidirectional reveals), expanded JSON-LD with awards + ordering URLs, updated llms.txt with press features. Deep scan passed.
+- **v1** — Initial build: 5 routes, design system, SEO/AEO base, JSON-LD, CLAUDE.md.
+
 ## Business Context
 
 - **Name:** Mal Al Sham — The Taste of Damascus (مطعم مال الشام)
@@ -13,14 +18,14 @@
 - **Hours:** Mon–Sun, 9:00 AM – 10:00 PM (7 days)
 - **Price range:** `$$` — Shawarma sandwich $12; Mixed Grill $23.99
 - **Reviews:** 1,500+ five-star (self-reported) / 3,131 on Restaurant Guru (4.4/5) / 648 on Yelp / 9,022 Facebook likes
-- **Featured in:** Eater San Diego (twice), Minnesota Tours ("Best Arab Restaurant in America"), The Nexus (5/5)
+- **Featured in:** Eater San Diego (twice), San Diego Magazine (El Cajon Guide 2024), East County Magazine, San Diego Reader, Minnesota Tours ("Best Arab Restaurant in America"), The Nexus (5/5)
 
 ## Stack
 
 - Next.js 16+ (App Router) · React 19 · TypeScript strict
 - Tailwind v4 (CSS-first `@theme` directive)
 - Framer Motion (entrance + hover)
-- GSAP 3.13 + ScrollTrigger (bidirectional scroll cinema)
+- GSAP 3.13 + ScrollTrigger (bidirectional scroll cinema, parallax, marquee, counters)
 - Lenis (smooth scroll)
 - SplitType (text reveals)
 - `next/font` → Playfair Display + DM Sans + Amiri
@@ -46,6 +51,16 @@
 
 Image radius: **10px** (never 4px). Section radius: 16px.
 
+## Logo handling
+
+The brand logo (`assets.logoBanner`) is a webp wordmark. Apply via the `<Logo />` component:
+
+- Default class: `.logo-screen` (`mix-blend-mode: screen`) — strips white halo on dark surfaces.
+- Light-bg variant: `.logo-multiply` (`mix-blend-mode: multiply`).
+- Force-white override: `forceWhite` prop → `filter: brightness(0) invert(1)`.
+
+Use `priority` only on above-fold (nav). Footer logo lazy by default.
+
 ## Conventions
 
 - TypeScript strict. Zero `any` without `// reason:` comment.
@@ -60,8 +75,10 @@ Image radius: **10px** (never 4px). Section radius: 16px.
 - Sizing: `100dvh` (never `100vh`).
 - Safe-area insets on sticky nav + footer.
 - WhatsApp FAB on every page.
-- LocalBusiness/Restaurant JSON-LD on homepage.
+- LocalBusiness/Restaurant JSON-LD on homepage (includes awards + ordering URLs).
 - Page transitions live in `app/template.tsx` — NEVER in `app/layout.tsx`.
+- `Counter` component (`@/components/animations/Counter`) animates 0 → target on scroll-in, reverses on scroll-out.
+- All ScrollTriggers use `toggleActions: "play none none reverse"` for bidirectional animations.
 
 ## Forbidden
 
@@ -83,6 +100,7 @@ Image radius: **10px** (never 4px). Section radius: 16px.
 ## Verified Asset URLs (use ONLY these)
 
 - Logo (4x):  `https://malalsham.com/wp-content/uploads/2024/09/mal-logo@4x-scaled.webp`
+- Logo banner (wide):  `https://malalsham.com/wp-content/uploads/2024/09/w-logo@4x-768x117.webp`
 - Icon (270): `https://malalsham.com/wp-content/uploads/2024/09/cropped-icon-logo-270x270.png`
 - Hummus:     `https://malalsham.com/wp-content/uploads/2024/09/mal-al-sham-hummus-768x432.jpg`
 - Interior:   `https://malalsham.com/wp-content/uploads/2024/09/IMG_2061-1536x1152-1-768x576.jpg`
@@ -90,9 +108,24 @@ Image radius: **10px** (never 4px). Section radius: 16px.
 - Kebab:      `https://malalsham.com/wp-content/uploads/elementor/thumbs/mal-al-sham-kebab_-qu7uml31fzip37xw1sv94wh6s6her6lticbu4ifjq8.jpg`
 - Shawarma:   `https://malalsham.com/wp-content/uploads/elementor/thumbs/SHAWARMA-MALALSHAM-kouzi-qu7umvf9j5wumxivdfc5ebv9bf2g3uqv7ri6ek07ts.jpg`
 
+## Ordering URLs (verified)
+
+- DoorDash:  https://www.doordash.com/en/store/mal-alsham-el-cajon-919486/
+- Uber Eats: https://www.ubereats.com/store/mal-al-sham/28RIjDWaT9ObZxnNMquQEA
+- Grubhub:   https://www.grubhub.com/restaurant/mal-al-sham-388-e-main-st-el-cajon/2523922
+- WhatsApp:  https://wa.me/16194011055
+
+## Press URLs (verified)
+
+- Eater San Diego: https://sandiego.eater.com/maps/best-affordable-cheap-food-restaurants-san-diego
+- San Diego Magazine: https://sandiegomagazine.com/food-drink/neighborhood-guide-el-cajon-2-2/
+- East County Magazine: https://www.eastcountymagazine.org/mal-al-sham-mediterranean-food
+- San Diego Reader: https://www.sandiegoreader.com/places/mal-al-sham/
+- Gourmet Guru IG: https://www.instagram.com/p/C-jTqIiPZZ5/
+
 ## Routes
 
-- `/` — Home (primary conversion)
+- `/` — Home (Hero → TrustBar → PressBar → Story → SignatureDishes → MenuPreview → WeekendSpecials → Testimonials → YelpCTA → OrderOnline → InstagramCTA → CateringCTA → FindUs)
 - `/menu` — Full menu, tabbed by category
 - `/catering` — Family platters, large-group orders
 - `/about` — Origin story
@@ -106,3 +139,4 @@ GitHub → vercel.com/new → import → Deploy. Domain: malalsham.com (Cloudfla
 
 - $250/month: hosting, monthly content updates (weekly specials), 1h edits.
 - `llms.txt` upsell: $250 one-time per existing client site.
+- Kling-animated shawarma rotisserie hero loop: phase-2 upsell.
